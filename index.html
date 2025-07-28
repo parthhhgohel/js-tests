@@ -5,9 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
-    <title>Document</title>
+    <title>Expense Tracker</title>
 </head>
 <body>
-    
+    <div class="header">
+        <h1 class="header">Expense Tracker</>
+    </div>
+    <div class="container">
+        <!-- Form -->
+         <div class="form-container">
+            <h2>Add New Expense</h2>
+            <form id="expenseForm">
+                <div class="field-group">
+                    <label for="name">Expense name</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="field-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" id="amount" required>
+                </div>
+                <div class="field-group">
+                    <label for="name">Date</label>
+                    <input type="date" name="date" id="date" required>
+                </div>
+                <div class="field-group">
+                    <label for="category">Category</label>
+                    <select class="field-group" id="category" required>
+                        <option value="" selected>select option</option>
+                        <option value="food">food</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="bills">Bills & Utilities</option>
+                        <option value="education">Education</option>
+                        <option value="personal">Personal & Lifestyle</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="health">Healthcare</option>
+                    </select>
+                </div>
+                <div class="field-group" id="form-buttons">
+                    <button type="submit" class="btn expense--add">Add Expense</button>
+                    <button type="reset" class="btn expense--reset">Reset</button>
+                </div>
+            </form>
+         </div>
+
+         <div class="table-container">
+            <table id="expenseTable">
+                <thead class="table-header">
+                    <th>No.</th>
+                    <th>Expense Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <!-- <button class="btn expense--remove" data-index="0">Remove</button> -->
+                             -
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Total Expense</td>
+                        <td id="total-expense">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+         </div>
+    </div>
 </body>
 </html>
+
+<!-- // dataRow.innerHTML = `<tr>
+    //                     <td>${dataNo}</td>
+    //                     <td>${data.name}</td>
+    //                     <td>${data.amount}</td>
+    //                     <td>${data.date}</td>
+    //                     <td>${data.category}</td>
+    //                     <td><button class="btn expense--remove" data-index="${index}">Remove</button></td>
+    //                 </tr>`;
+
+    // tbody.appendChild(dataRow); -->
