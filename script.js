@@ -15,7 +15,15 @@ let expenseData = [];
 
 let dataNo = 1;
 
-const showData = function () {
+function getExpenseFromLocal() {
+  if (localStorage.getItem("expenseData")) {
+    expenseData = JSON.parse(localStorage.getItem("expenseData"));
+    showData();
+    showTotalExpense();
+  }
+}
+
+function showData() {
   tbody.innerHTML = "";
   let dataNo = 1;
 
@@ -23,14 +31,6 @@ const showData = function () {
     let dataRow = document.createElement("tr");
 
     // load from local storage
-    const storedData = localStorage.getItem("expenseData");
-    if (storedData) {
-        expenseData = JSON.parse(storedData);
-        console.log(expenseData);
-    } else {
-        expenseData = []; // fallback
-    }
-
     dataRow.innerHTML = `<tr>
                             <td>${dataNo}</td>
                             <td>${data.name}</td>
@@ -42,31 +42,22 @@ const showData = function () {
 
     tbody.appendChild(dataRow);
     dataNo++;
-
-    const removeExpense = document.querySelector(".expense--remove");
-    removeExpense.addEventListener("click", function () {
-      expenseData.splice(index, 1);
-
-      for (let i = 0; i < expenseData.length; i++) {
-        expenseData[i].idx = i;
-      }
-
-      storeExpenseToLocal();
-      showData();
-      showTotalExpense();
-    });
+    // if(dataNo > 3){
+    //   tbody.style.height = "20rem";
+    //   tbody.style.overflowY = "scroll";
+    // }
   });
-};
+}
 
-const showTotalExpense = function () {
+function showTotalExpense() {
   let totalExpense = 0;
   for (let i = 0; i < expenseData.length; i++) {
     totalExpense += parseInt(expenseData[i].amount);
   }
   document.getElementById("total-expense").innerHTML = totalExpense;
-};
+}
 
-const addData = function (idx, name, amount, date, category) {
+function addData(idx, name, amount, date, category) {
   const data = {
     idx: idx,
     name: name,
@@ -79,19 +70,36 @@ const addData = function (idx, name, amount, date, category) {
   showData();
   storeExpenseToLocal();
   showTotalExpense();
-};
+}
+
+function storeExpenseToLocal() {
+  localStorage.setItem("expenseData", JSON.stringify(expenseData));
+}
 
 // remove expense from both table and local storage
-const removeExpense = function (index) {
+function removeExpense(index) {
   expenseData.splice(index, 1);
-
   for (let i = 0; i < expenseData.length; i++) {
     expenseData[i].idx = i;
   }
-
   showData();
   showTotalExpense();
-};
+  storeExpenseToLocal();
+}
+
+// function storeLocal(name, amount, date, category){
+//     let key = dataNo
+// }
+
+// Remove expense
+tbody.addEventListener("click", function (e) {
+  if (e.target.classList.contains("expense--remove")) {
+    let index = e.target.getAttribute("data-index");
+    removeExpense(index);
+  }
+});
+
+window.addEventListener("DOMContentLoaded", getExpenseFromLocal);
 
 expenseForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -99,15 +107,3 @@ expenseForm.addEventListener("submit", function (e) {
   addData(dataNo, Expname.value, amount.value, date.value, category.value);
   expenseForm.reset();
 });
-
-// function storeLocal(name, amount, date, category){
-//     let key = dataNo
-// }
-
-const storeExpenseToLocal = function () {
-  localStorage.setItem("expenseData", JSON.stringify(expenseData));
-};
-
-// const loadExpensefromLocal = function () {
-//   JSON.parse(localStorage.getItem("expenseData"));
-// };
