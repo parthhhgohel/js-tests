@@ -272,7 +272,7 @@ td{
 }
 
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
     .header{
         padding: .3rem;
     }
@@ -310,4 +310,4 @@ td{
         font-size: 1.2rem;
         text-wrap: nowrap;
     }
-}
+} */
