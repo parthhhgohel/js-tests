@@ -269,7 +269,7 @@ td {
     .table-container {
         width: 90%;
         height: 30rem;
-        margin: 0rem auto;
+        margin: 1.6rem auto;
         overflow-x: scroll;
         overflow-y: scroll;
     }
