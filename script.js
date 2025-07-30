@@ -6,6 +6,9 @@ const Expname = document.getElementById("name");
 const amount = document.getElementById("amount");
 const date = document.getElementById("date");
 const category = document.getElementById("category");
+const closeBtn = document.querySelector(".close-btn");
+const overlay = document.querySelector(".overlay");
+const addExpenseBtn = document.querySelector(".add-expense-btn");
 
 const tbody = expenseTable.querySelector("tbody");
 
@@ -97,6 +100,23 @@ tbody.addEventListener("click", function (e) {
     let index = e.target.getAttribute("data-index");
     removeExpense(index);
   }
+});
+
+addExpenseBtn.addEventListener("click", function () {
+  overlay.classList.add("active");
+  // blur background
+  overlay.style.backdropFilter = "blur(5px)";
+});
+
+// Esc to close
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    overlay.classList.remove("active");
+  }
+});
+
+closeBtn.addEventListener("click", function () {
+  overlay.classList.remove("active");
 });
 
 window.addEventListener("DOMContentLoaded", getExpenseFromLocal);

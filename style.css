@@ -1,88 +1,108 @@
-/* write css here */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html{
+
+html {
     font-size: 62.5%;
     font-family: sans-serif;
     /* background-color: #c1d3f0; */
 }
 
-.container{
-    /* border: 1px solid red; */
+.container {
     display: flex;
     flex-direction: column;
 }
 
-.header{
+.header {
     background-color: #f7efd2;
     padding: 1rem;
     text-align: center;
 }
 
-h1{
-    color: 	#475c6c;
+h1 {
+    color: #475c6c;
     text-align: center;
     margin: 1rem;
     font-size: 3rem;
 }
 
-h2{
-    color: 	#475c6c;
+h2 {
+    color: #475c6c;
     text-align: center;
-    /* margin: 1rem; */
     font-size: 2rem;
 }
 
-.form-container{
-    /* border: 1px solid #1a1a1a; */
-    
+.overlay {
+    visibility: hidden;
+    transform: scale(0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.active {
+    visibility: visible;
+    transform: scale(1);
+}
+
+.popup-container {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 3rem;
-    padding: 2rem;
+    padding: 4rem;
     gap: 1rem;
-
+    z-index: 100;
     box-shadow: 0px 0px 1rem #475c6c2f;
     border-radius: 2rem;
+    background-color: white;
+    position: relative;
 }
 
-#expenseForm{
+#expenseForm {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.field-group{
-    /* border: 1px solid green; */
+.field-group {
     display: flex;
     flex-direction: column;
-    gap: .8rem;
+    gap: 0.8rem;
     width: 40rem;
 }
 
-label{
+label {
     font-size: 1.6rem;
     color: #475c6c;
     font-weight: 500;
 }
 
-/* For removing arrow */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    /* -webkit-appearance: none;
-    -moz-appearance: none; */
+
+/* remove arrows */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
-input, select{
+input,
+select {
     outline: none;
-    padding: .5rem;
+    padding: 0.5rem;
     border: 1px solid #475c6c;
     border-radius: 0.5rem;
     height: 3rem;
@@ -91,48 +111,60 @@ input, select{
     color: #475c6c;
 }
 
-select{
+select {
     color: #475c6c;
     cursor: pointer;
     background-color: white;
 }
 
-#form-buttons{
-    display: flex ;
+#form-buttons {
+    display: flex;
     flex-direction: row;
     gap: 2rem;
 }
 
-#form-buttons button{
+#form-buttons button {
     width: 100%;
 }
 
-.btn{
-    /* border: 1px solid #1a1a1a; */
+.btn {
     border: none;
     cursor: pointer;
-    padding: .5rem;
+    padding: 0.5rem;
     border-radius: 0.5rem;
     font-size: 1.6rem;
 }
 
-.btn:hover{
+.btn:hover {
     opacity: 0.8;
     transition: all 0.2s ease-in-out;
 }
 
-.expense--add{
+.add-expense-btn {
+    background-color: rgb(125, 125, 255);
+    color: white;
+}
+
+.close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.expense--add {
     background-color: #475c6c;
     color: white;
 }
 
-.expense--reset{
+.expense--reset {
     background-color: white;
     color: #475c6c;
     border: 1px solid #475c6c !important;
 }
 
-.expense--remove{
+.expense--remove {
     border: 1px solid red !important;
     background-color: red;
     color: white;
@@ -140,59 +172,58 @@ select{
     font-weight: 550;
 }
 
-
-/* Expense Table */
-
-.table-container{
+.table-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 3rem;
 }
 
-#expenseTable{
+#expenseTable {
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
     border: 1px solid #1a1a1a;
-    /* margin: 1rem; */
 }
 
-.table-header{
+.table-header {
     background-color: #475c6c;
     color: white;
 }
 
-th{
+th {
     text-align: left;
     padding: 1rem;
     font-size: 1.6rem;
 }
 
-tr{
+tr {
     border: 1px solid #475c6c42;
-
 }
 
-td{
+td {
     text-align: left;
     padding: 1rem;
     font-size: 1.6rem;
 }
 
 @media screen and (min-width: 1200px) {
-    .container{
+    .container {
         width: 100%;
-        flex-direction: row;
+        position: relative;
     }
 
-    .form-container{
+    .form-container {
         width: 35%;
-        margin: 2rem;
+        margin: 2rem auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
-    .table-container{
+    .table-container {
         width: 65%;
-        margin: 2rem;
+        margin: 4rem auto;
     }
 }
 
@@ -209,22 +240,41 @@ td{
         max-width: 100%;
     }
 
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #475c6c42;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        overflow-y: auto;
+        z-index: 10;
+    }
+
     .form-container {
         width: 100%;
+        max-width: 40rem;
         padding: 1.5rem;
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.2);
+        position: relative;
         margin: 1rem 0;
     }
 
     .table-container {
         width: 90%;
         height: 30rem;
-        margin: 1rem auto;
+        margin: 0rem auto;
         overflow-x: scroll;
         overflow-y: scroll;
     }
 
     #expenseTable {
-        /* min-width: 60rem; */
         width: 90%;
         margin: 1rem auto;
     }
@@ -233,29 +283,31 @@ td{
         padding: 0.5rem;
     }
 
-    h1{
+    h1 {
         font-size: 2rem;
     }
 
-    h2{
+    h2 {
         font-size: 1.5rem;
     }
 
-    label{
+    label {
         font-size: 1.4rem;
     }
 
-    input,select{
+    input,
+    select {
         font-size: 1.4rem;
         height: 3rem;
     }
 
-    .btn{
+    .btn {
         font-size: 1.4rem;
         padding: 0.5rem;
     }
 
-    th,td{
+    th,
+    td {
         padding: 0.8rem;
         font-size: 1.4rem;
         text-wrap: nowrap;
@@ -270,5 +322,3 @@ td{
         width: 100%;
     }
 }
-
-
